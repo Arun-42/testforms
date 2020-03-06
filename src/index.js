@@ -1,12 +1,30 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import FormRenderer, {
+  componentTypes
+} from "@data-driven-forms/react-form-renderer";
+import {
+  formFieldsMapper,
+  layoutMapper
+} from "@data-driven-forms/pf4-component-mapper";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const schema = {
+  fields: [
+    {
+      component: componentTypes.TEXT_FIELD,
+      name: "name",
+      label: "Your name"
+    }
+  ]
+};
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+const Form = () => (
+  <FormRenderer
+    schema={schema}
+    formFieldsMapper={formFieldsMapper}
+    layoutMapper={layoutMapper}
+    onSubmit={console.log}
+  />
+);
+
+ReactDOM.render(<Form />, document.getElementById("root"));
